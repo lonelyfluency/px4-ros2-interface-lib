@@ -15,12 +15,13 @@ find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(px4_ros2_cpp REQUIRED)
 
 include_directories(include ${Eigen3_INCLUDE_DIRS})
 add_executable(example_mode_manual
         src/main.cpp)
-target_link_libraries(example_mode_manual PUBLIC Eigen3::Eigen px4_ros2_cpp::px4_ros2_cpp rclcpp::rclcpp)
+ament_target_dependencies(example_mode_manual Eigen3 px4_ros2_cpp rclcpp geometry_msgs)
 
 install(TARGETS
         example_mode_manual
